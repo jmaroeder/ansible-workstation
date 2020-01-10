@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -ex
 
 if test ! $(which ansible); then
     # Install Ansible
@@ -25,4 +25,4 @@ if test ! $(which ansible); then
     fi
 fi
 
-sudo ansible-pull -U https://github.com/jmaroeder/ansible-workstation.git
+ansible-pull -U https://github.com/jmaroeder/ansible-workstation.git

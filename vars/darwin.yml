@@ -53,3 +53,7 @@ mas_installed_apps:
     name: Magnet (2.4.5)
   - id: 1440147259
     name: AdGuard for Safari (1.5.4)
+
+
+mas_email: "jmaroeder@gmail.com"
+mas_signin_dialog: true

@@ -1,14 +1,27 @@
 - hosts: localhost
-  become: true
 
   vars_files:
     - config.yml
 
   pre_tasks:
-    - include_tasks: "tasks/{{ansible_facts['os_family']|lower}}/pre.yml"
+    - include_vars: vars/common.yml
+    - include_vars: "{{prerequisites_file}}"
+      with_first_found:
+        - files:
+            - "vars/{{ansible_facts['os_family']|lower}}.yml"
+          skip: true
+      loop_control:
+        loop_var: prerequisites_file
+    - include_tasks: "{{prerequisites_file}}"
+      with_first_found:
+        - files:
+            - "tasks/{{ansible_facts['os_family']|lower}}/pre.yml"
+          skip: true
+      loop_control:
+        loop_var: prerequisites_file
     - include_tasks: "tasks/pre.yml"
 
+
   tasks:
-    - include_tasks: tasks/auto_update.yml
-    - include_tasks: "tasks/pre-{{ansible_facts['os_family']|lower}}"
+    # - include_tasks: tasks/auto_update.yml
     - include_tasks: tasks/packages.yml
