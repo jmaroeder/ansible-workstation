@@ -1,3 +1,5 @@
+# geerlingguy.homebrew
+
 homebrew_installed_packages:
   - asdf
   - autoconf
@@ -47,6 +49,9 @@ homebrew_cask_apps:
   - visual-studio-code
   - vlc
 
+
+# geerlingguy.mas
+
 mas_installed_apps:
   - id: 441258766
     name: Magnet (2.4.5)
@@ -56,3 +61,90 @@ mas_installed_apps:
 
 mas_email: "jmaroeder@gmail.com"
 mas_signin_dialog: true
+
+
+# kinglouie.macos
+
+system:
+  ui:
+    interface_style: "Dark"
+    expand_save_panel: true
+    expand_print_panel: true
+    enable_subpixel_font_rendering: true
+    show_all_file_extensions: true
+    springloading_directories_delay: 1
+    enable_menubar_transparency: false
+  screensaver:
+    activation_delay: 0
+    ask_password: true
+    ask_password_delay: 0
+    screensaver:
+      name: Message
+      path: /System/Library/Screen Savers/FloatingMessage.saver
+  input:
+    enable_auto_correct: false
+    enable_smart_quotes: false
+    enable_smart_dashes: false
+    enable_automatic_capitalization: false
+    enable_automatic_periods: false
+    key_repeat_rate: 2
+    initial_key_repeat_delay: 15
+    enable_full_keyboard_access: true
+    enable_space_hotkeys: false
+  misc:
+    save_application_state_on_quit: false
+    disable_dsstore_on_network_shares: true
+    disable_dsstore_on_usb_drives: true
+    disable_disk_image_verification: true
+    disable_spotlight_network_indexing: true
+    save_new_docs_to_icloud: false
+    enable_ssh: false
+    enable_crash_reporter: false
+    enable_sudden_motion_sensor: true
+    enable_hibernation: false
+
+finder:
+  new_window_target: "PfHm"
+  show_file_extensions_warning: false
+  warn_before_emptying_the_trash: false
+  show_pathbar: true
+  show_statusbar: true
+  default_view_style: "Nlsv"
+  show_external_harddrives_on_desktop: false
+  show_harddrives_on_desktop: false
+  show_mounted_servers_on_desktop: false
+  show_removable_media_on_desktop: false
+  hide_user_library: false
+  hide_system_volumes: false
+  expand_infopane:
+    - { name: General, value: true }
+    - { name: MetaData, value: false }
+    - { name: OpenWith, value: false }
+    - { name: Name, value: false }
+    - { name: Comments, value: false }
+    - { name: Preview, value: false }
+    - { name: Privileges, value: false }
+  iconview_arrange_by: "grid"
+
+dock:
+  rearrange_spaces_by_last_use: false
+  autohide: true
+  apps_remove_undefined: true
+  apps:
+    - { name: Google Chrome, path: /Applications/Google Chrome.app }
+    - { name: Safari, path: /Applications/Safari.app }
+    - { name: Slack, path: /Applications/Slack.app }
+    - { name: Calendar, path: /Applications/Calendar.app }
+    - { name: Mail, path: /Applications/Mail.app }
+    - { name: iTerm, path: /Applications/iTerm.app }
+    - { name: Messages, path: /Applications/Messages.app }
+    - { name: App Store, path: /Applications/App Store.app }
+    - { name: System Preferences, path: /Applications/System Preferences.app }
+
+safari:
+  enable_developer_menu: true
+  search_with_word_start_only: false
+
+mail:
+  address_include_name_on_pasteboard: false
+  enable_threading: true

@@ -1,0 +1,8 @@
+- name: MacOS customizations
+  include_role:
+    name: kinglouie.macos
+
+- name: MacOS scripted customizations
+  become: true
+  become_user: root
+  script: files/macos.sh
