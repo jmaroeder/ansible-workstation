@@ -25,4 +25,4 @@ if test ! $(which ansible); then
     fi
 fi
 
-sudo ansible-pull -U https://github.com/jmaroeder/ansible.git
+sudo ansible-pull -U https://github.com/jmaroeder/ansible-workstation.git
