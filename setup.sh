@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ex
+set -e
 
 if test ! $(which ansible); then
     # Install Ansible
@@ -14,6 +14,7 @@ if test ! $(which ansible); then
 
     if [[ $machine == "Linux" ]]; then
         # Ubuntu
+        set -x
         sudo apt-get install ansible
     elif [[ $machine == "Mac" ]]; then
         # OSX
@@ -21,8 +22,10 @@ if test ! $(which ansible); then
             echo "Installing Homebrew..."
             yes | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" &> /dev/null
         fi
+        set -x
         brew install ansible
     fi
 fi
 
-ansible-pull -U https://github.com/jmaroeder/ansible-workstation.git
+set -x
+ansible-pull --ask-become-pass --url https://github.com/jmaroeder/ansible-workstation.git
