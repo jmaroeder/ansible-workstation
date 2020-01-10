@@ -1,0 +1,15 @@
+[submodule "roles/ansible-role-mas"]
+	path = roles/geerlingguy.mas
+	url = https://github.com/geerlingguy/ansible-role-mas.git
+[submodule "roles/ansible-role-homebrew"]
+	path = roles/geerlingguy.homebrew
+	url = https://github.com/geerlingguy/ansible-role-homebrew.git
+[submodule "roles/elliotweiser.osx-command-line-tools"]
+	path = roles/elliotweiser.osx-command-line-tools
+	url = https://github.com/elliotweiser/ansible-osx-command-line-tools.git
+[submodule "roles/gantsign.visual-studio-code-extensions"]
+	path = roles/gantsign.visual-studio-code-extensions
+	url = https://github.com/gantsign/ansible-role-visual-studio-code-extensions.git
+[submodule "roles/cimon-io.asdf"]
+	path = roles/cimon-io.asdf
+	url = https://github.com/cimon-io/ansible-role-asdf.git

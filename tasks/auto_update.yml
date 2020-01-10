@@ -1,0 +1,14 @@
+- name: Create ansible user
+  user: name=ansible uid=900
+
+- name: Add ansible user to sudoers
+  copy:
+    src: files/etc/sudoers.d/ansible
+    dest: /etc/sudoers.d/ansible
+
+- name: Install cron job (ansible-pull)
+  cron:
+    user: ansible
+    name: Ansible pull
+    minute: "*/10"
+    job: "ansible-pull -o -U https://github.com/jmaroeder/ansible.git > /dev/null"

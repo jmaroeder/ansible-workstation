@@ -1,0 +1,7 @@
+- name: Mac App Store
+  include_role:
+    name: geerlingguy.mas
+
+- name: Homebrew
+  include_role:
+    name: geerlingguy.homebrew

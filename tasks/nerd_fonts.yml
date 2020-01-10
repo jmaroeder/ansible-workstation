@@ -1,0 +1,20 @@
+- name: Install Nerd Fonts
+  tasks:
+    - name: Create temporary checkout directory
+      tempfile:
+        state: directory
+      register: nerd_fonts_checkout_directory
+    - name: Checkout
+      git:
+        repo: https://github.com/ryanoasis/nerd-fonts.git
+        dest: "{{nerd_fonts_checkout_directory.path}}"
+    - name: Install
+      shell:
+        cmd: "./install.sh {{item}}"
+        chdir: "{{nerd_fonts_checkout_directory.path}}"
+      loop: "{{nerd_fonts}}"
+    - name: Cleanup
+      file:
+        path: "{{nerd_fonts_checkout_directory.path}}"
+        state: absent
+      when: nerd_fonts_checkout_directory.path is defined

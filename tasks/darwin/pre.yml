@@ -1,0 +1,5 @@
+- name: Add homebrew path to crontab
+  cron:
+    name: PATH
+    env: yes
+    job: "/usr/local/bin:/usr/bin:/bin"
