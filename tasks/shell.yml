@@ -1,0 +1,8 @@
+- name: Install fisher
+  get_url:
+    url: https://git.io/fisher
+    dest: "{{ansible_user_dir}}/.config/fish/functions/fisher.fish"
+
+- name: Load fishfile
+  shell: fish -c fisher
+  when: login_shell == 'fish'

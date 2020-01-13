@@ -1,7 +1,62 @@
-- name: Mac App Store
+- name: Install Mac App Store apps
   include_role:
     name: geerlingguy.mas
+  vars:
+    mas_installed_apps:
+      - id: 441258766
+        name: Magnet (2.4.5)
+      - id: 1440147259
+        name: AdGuard for Safari (1.5.4)
+  when: not ansible_check_mode
 
-- name: Homebrew
+- name: Install Homebrew
   include_role:
     name: geerlingguy.homebrew
+  vars:
+    homebrew_cask_accept_external_apps: true
+    homebrew_cask_apps:
+      - docker
+      - dropbox
+      - firefox
+      - google-chrome
+      - insomnia
+      - slack
+      - spotify
+      - the-unarchiver
+      - visual-studio-code
+      - vlc
+    homebrew_installed_packages:
+      - asdf
+      - autoconf
+      - cmake
+      - cookiecutter
+      - curl
+      - curl-openssl
+      - direnv
+      - fabianishere/personal/pam_reattach
+      - fish
+      - gettext
+      - hub
+      - jq
+      - kubectx
+      - kubernetes-cli
+      - libevent
+      - mas
+      - node
+      - node-build
+      - openssl
+      - python
+      - readline
+      - ruby-build
+      - sqlite
+      - ssh-copy-id
+      - trash
+      - unzip
+      - wget
+      - xz
+      - yarn
+      - yq
+      - zlib
+    homebrew_taps:
+      - homebrew/core
+      - homebrew/cask

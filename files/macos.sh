@@ -5,14 +5,14 @@ set -e
 # with additions from https://github.com/geerlingguy/dotfiles/blob/master/.osx
 # and customizations by https://github.com/jmaroeder
 
-# Warn that some commands will not be run if the script is not run as root.
-if [[ $EUID -ne 0 ]]; then
-  RUN_AS_ROOT=false
-  printf "Certain commands will not be run without sudo privileges. To run as root, run the same command prepended with 'sudo', for example: $ sudo $0\n\n" | fold -s -w 80
-else
+# Warn that some commands will not be run if the script is not able to use sudo
+if sudo -n true; then
   RUN_AS_ROOT=true
   # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+else
+  RUN_AS_ROOT=false
+  printf "Certain commands will not be run without sudo privileges. To run as root, run 'sudo -v', enter your password, then re-run this command.\n\n" | fold -s -w 80
 fi
 
 # Close any open System Preferences panes, to prevent them from overriding
@@ -122,13 +122,13 @@ fi
 # Disable auto-correct
 # defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-if [[ "$RUN_AS_ROOT" = true ]]; then
+# if [[ "$RUN_AS_ROOT" = true ]]; then
 	# Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 	# all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
 	# rm -rf ~/Library/Application Support/Dock/desktoppicture.db
 	# sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 	# sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
-fi
+# fi
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -180,7 +180,7 @@ if [[ "$RUN_AS_ROOT" = true ]]; then
 	# Show language menu in the top right corner of the boot screen
 	# sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
 
-	# Set the timezone; see `sudo systemsetup -listtimezones` for other values
+	# Set the timezone; see sudo systemsetup -listtimezones` for other values
 	sudo systemsetup -settimezone "America/New_York" > /dev/null
 fi
 
@@ -223,11 +223,11 @@ if [[ "$RUN_AS_ROOT" = true ]]; then
 	sudo pmset -a hibernatemode 0
 
 	# Remove the sleep image file to save disk space
-	sudo rm /private/var/vm/sleepimage
+	# sudo rm /private/var/vm/sleepimage
 	# Create a zero-byte file instead…
-	sudo touch /private/var/vm/sleepimage
+	# sudo touch /private/var/vm/sleepimage
 	# …and make sure it can’t be rewritten
-	sudo chflags uchg /private/var/vm/sleepimage
+	# sudo chflags uchg /private/var/vm/sleepimage
 fi
 
 ###############################################################################
@@ -357,10 +357,10 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 # Show the ~/Library folder
 # chflags nohidden ~/Library
 
-if [[ "$RUN_AS_ROOT" = true ]]; then
+# if [[ "$RUN_AS_ROOT" = true ]]; then
     # Show the /Volumes folder
     # sudo chflags nohidden /Volumes
-fi
+# fi
 
 # Remove Dropbox’s green checkmark icons in Finder
 file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
@@ -442,11 +442,11 @@ defaults write com.apple.dock show-recents -bool false
 # Reset Launchpad, but keep the desktop wallpaper intact
 find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
 
-if [[ "$RUN_AS_ROOT" = true ]]; then
+# if [[ "$RUN_AS_ROOT" = true ]]; then
 	# Add iOS & Watch Simulator to Launchpad
 	# sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
 	# sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
-fi
+# fi
 
 # Add a spacer to the left side of the Dock (where the applications are)
 #defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
@@ -594,14 +594,14 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
 # Spotlight                                                                   #
 ###############################################################################
 
-if [[ "$RUN_AS_ROOT" = true ]]; then
+# if [[ "$RUN_AS_ROOT" = true ]]; then
 	# Hide Spotlight tray-icon (and subsequent helper)
 	#sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 	# Disable Spotlight indexing for any volume that gets mounted and has not yet
 	# been indexed before.
 	# Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-	sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-fi
+	# sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+# fi
 # Change indexing order and disable some search results
 # Yosemite-specific search results (remove them if you are using macOS 10.9 or older):
 # 	MENU_DEFINITION

@@ -1,0 +1,17 @@
+- git_config:
+    name: user.name
+    scope: global
+    value: James Roeder
+- git_config:
+    name: user.email
+    scope: global
+    value: jmaroeder@gmail.com
+- git_config:
+    name: core.excludesfile
+    scope: global
+    value: "{{ansible_user_dir}}/.gitignore"
+- git_config:
+    name: credential.helper
+    scope: global
+    value: osxkeychain
+  when: ansible_os_family == "Darwin"

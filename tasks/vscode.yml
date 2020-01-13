@@ -1,13 +1,18 @@
 - name: VS Code Extensions
-  include_role:
-    name: gantsign.visual-studio-code-extensions
-    users:
-    - username: "{{primary_user}}"
-      visual_studio_code_extensions:
-        - mauve.terraform
-        - mikestead.dotenv
-        - ms-azuretools.vscode-docker
-        - redhat.vscode-yaml
-        - skyapps.fish-vscode
-        - vscoss.vscode-ansible
-        - wholroyd.jinja
+  block:
+    - name: install extensions
+      command: "{{visual_studio_code_extensions_exe}} --install-extension '{{item}}'"
+      register: vscode_result
+      changed_when: "'already installed' not in vscode_result.stdout"
+      loop: "{{visual_studio_code_extensions}}"
+
+  vars:
+    visual_studio_code_extensions:
+      - mauve.terraform
+      - mikestead.dotenv
+      - ms-azuretools.vscode-docker
+      - redhat.vscode-yaml
+      - skyapps.fish-vscode
+      - vscoss.vscode-ansible
+      - wholroyd.jinja
+    visual_studio_code_extensions_exe: code
