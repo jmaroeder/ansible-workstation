@@ -10,11 +10,8 @@
     name: core.excludesfile
     scope: global
     value: "{{ansible_user_dir}}/.gitignore"
-- block:
-    - git_config:
-        name: credential.helper
-        scope: global
-        value: osxkeychain
-    - name: Store github access token in keychain
-      command: "security add-internet-password -a '{{github_user}}' -s 'github.com' -w '{{github_access_token}}' -r 'htps' -U"
+- git_config:
+    name: credential.helper
+    scope: global
+    value: osxkeychain
   when: ansible_os_family == "Darwin"
