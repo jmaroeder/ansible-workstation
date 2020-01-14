@@ -1,4 +1,5 @@
 login_shell: fish
+github_user: jmaroeder
 github_access_token: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           31346434626338373530343634336137663261636536656536363138323431333163373461616262
