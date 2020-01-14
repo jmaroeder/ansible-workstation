@@ -89,8 +89,6 @@
       enable_threading: true
 
 - name: MacOS scripted customizations
-  become: true
-  become_user: root
   script: files/macos.sh
 
 - include_tasks: tasks/darwin/shell.yml

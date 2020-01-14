@@ -20,10 +20,8 @@
         loop_var: prerequisites_file
 
   tasks:
-    # - include_tasks: tasks/auto_update.yml
     - include_tasks: tasks/packages.yml
     - include_tasks: tasks/git.yml
-    - include_tasks: tasks/nerd_fonts.yml
     - include_tasks: tasks/shell.yml
     - include_tasks: tasks/vscode.yml
     - include_tasks: tasks/post.yml

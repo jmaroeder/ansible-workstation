@@ -18,6 +18,7 @@
       - docker
       - dropbox
       - firefox
+      - font-inconsolata-nerd-font-mono
       - google-chrome
       - insomnia
       - slack
@@ -60,3 +61,4 @@
     homebrew_taps:
       - homebrew/core
       - homebrew/cask
+      - homebrew/cask-fonts

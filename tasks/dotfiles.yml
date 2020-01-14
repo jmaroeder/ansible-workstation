@@ -1,3 +1,8 @@
 - name: Install dotfiles
   block:
     - name: Checkout dotfiles
+      git:
+        repo: https://github.com/jmaroeder/dotfiles.git
+        dest: "{{ansible_user_dir}}/src/github.com/jmaroeder/dotfiles"
+    - name: Symlink
+      command: "{{ansible_user_dir}}/src/github.com/jmaroeder/dotfiles/symlink.sh"
