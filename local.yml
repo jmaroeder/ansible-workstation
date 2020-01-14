@@ -10,6 +10,7 @@
         - files:
             - "vars/{{ansible_facts['os_family']|lower}}.yml"
           skip: true
+    - include_tasks: "tasks/pre.yml"
     - include_tasks: "{{prerequisites_file}}"
       with_first_found:
         - files:
@@ -17,15 +18,15 @@
           skip: true
       loop_control:
         loop_var: prerequisites_file
-    - include_tasks: "tasks/pre.yml"
 
   tasks:
     # - include_tasks: tasks/auto_update.yml
-    # - include_tasks: tasks/packages.yml
-    # - include_tasks: tasks/git.yml
-    # - include_tasks: tasks/nerd_fonts.yml
-    # - include_tasks: tasks/shell.yml
-    # - include_tasks: tasks/vscode.yml
+    - include_tasks: tasks/packages.yml
+    - include_tasks: tasks/git.yml
+    - include_tasks: tasks/nerd_fonts.yml
+    - include_tasks: tasks/shell.yml
+    - include_tasks: tasks/vscode.yml
+    - include_tasks: tasks/post.yml
     - include_tasks: "{{post_file}}"
       with_first_found:
         - files:

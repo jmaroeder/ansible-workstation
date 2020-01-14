@@ -1,43 +1,48 @@
 - name: Install Nerd Fonts
   block:
-    # - name: Get currently installed fonts
-    #   shell: system_profiler -json SPFontsDataType 2>/dev/null | jq -r '[.SPFontsDataType[].typefaces[].family] | unique'
-    #   register: output
-    #   when: ansible_os_family == "Darwin"
-    # - set_fact:
-    #     installed_fonts: "{{output.stdout|from_json}}"
-    #   when: ansible_os_family == "Darwin"
-    # - set_fact:
-    #     fonts_to_install: "{{nerd_fonts|difference(installed_fonts)}}"
-    - name: Create temporary working directory
-      tempfile:
-        state: directory
-      register: nerd_fonts_checkout_directory
-    - name: Copy installer script from github
-      get_url:
-        url: https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh
-        dest: "{{nerd_fonts_checkout_directory.path}}/install.sh"
-    - name: Set up patched-fonts directories
-      file:
-        path: "{{nerd_fonts_checkout_directory.path}}/patched-fonts/{{item}}"
-        state: directory
-      loop: "{{nerd_fonts}}"
-    - name: Copy nerd fonts from github
-      script:
-        chdir: "{{nerd_fonts_checkout_directory.path}}/patched-fonts/{{item}}"
-        cmd: "files/git-download.sh https://api.github.com/repos/ryanoasis/nerd-fonts/contents/patched-fonts/{{item}}"
-      loop: "{{nerd_fonts}}"
-    - name: Install
-      shell:
-        cmd: "bash ./install.sh {{item}}"
-        chdir: "{{nerd_fonts_checkout_directory.path}}"
-      loop: "{{nerd_fonts}}"
-    - name: Cleanup
-      file:
-        path: "{{nerd_fonts_checkout_directory.path}}"
-        state: absent
-      when: nerd_fonts_checkout_directory.path is defined
+    - name: Get currently installed fonts (macOS)
+      block:
+        - shell: system_profiler -json SPFontsDataType 2>/dev/null | jq -r '[.SPFontsDataType[].typefaces[].family] | unique'
+          register: output
+        - set_fact:
+            installed_fonts: "{{output.stdout|from_json}}"
+      when: ansible_os_family == "Darwin"
+    - name: Get currently installed fonts (Linux)
+      set_fact:
+        installed_fonts: []
+    - set_fact:
+        fonts_to_install: "{{nerd_fonts|difference(installed_fonts)}}"
+    - name: Install missing nerd fonts
+      block:
+        - name: Create temporary working directory
+          tempfile:
+            state: directory
+          register: nerd_fonts_checkout_directory
+        - name: Copy installer script from github
+          get_url:
+            url: https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh
+            dest: "{{nerd_fonts_checkout_directory.path}}/install.sh"
+        - name: Set up patched-fonts directories
+          file:
+            path: "{{nerd_fonts_checkout_directory.path}}/patched-fonts/{{item}}"
+            state: directory
+          loop: "{{nerd_fonts}}"
+        - name: Copy nerd fonts from github
+          script:
+            chdir: "{{nerd_fonts_checkout_directory.path}}/patched-fonts/{{item}}"
+            cmd: "files/git-download.sh https://api.github.com/repos/ryanoasis/nerd-fonts/contents/patched-fonts/{{item}}"
+          loop: "{{nerd_fonts}}"
+        - name: Install
+          shell:
+            cmd: "bash ./install.sh {{item}}"
+            chdir: "{{nerd_fonts_checkout_directory.path}}"
+          loop: "{{nerd_fonts}}"
+        - name: Cleanup
+          file:
+            path: "{{nerd_fonts_checkout_directory.path}}"
+            state: absent
+          when: nerd_fonts_checkout_directory.path is defined
+      when: fonts_to_install|length > 0
   vars:
     nerd_fonts:
       - Inconsolata
-  when: nerd_fonts|length > 0

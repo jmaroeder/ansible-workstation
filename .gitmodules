@@ -15,4 +15,4 @@
 	url = https://github.com/cimon-io/ansible-role-asdf.git
 [submodule "roles/kinglouie.macos"]
 	path = roles/kinglouie.macos
-	url = https://github.com/kinglouie/ansible-role-macos.git
+	url = https://github.com/jmaroeder/ansible-role-macos.git
