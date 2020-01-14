@@ -32,5 +32,6 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+
 set -x
-ansible-pull --url https://github.com/jmaroeder/ansible-workstation.git
+ansible-pull --url https://github.com/jmaroeder/ansible-workstation.git --ask-vault-pass
