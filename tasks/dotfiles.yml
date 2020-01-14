@@ -1,0 +1,3 @@
+- name: Install dotfiles
+  block:
+    - name: Checkout dotfiles
