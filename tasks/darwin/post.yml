@@ -73,12 +73,12 @@
         - { name: Google Chrome, path: /Applications/Google Chrome.app }
         - { name: Safari, path: /Applications/Safari.app }
         - { name: Slack, path: /Applications/Slack.app }
-        - { name: Calendar, path: /Applications/Calendar.app }
-        - { name: Mail, path: /Applications/Mail.app }
+        - { name: Calendar, path: /System/Applications/Calendar.app }
+        - { name: Mail, path: /System/Applications/Mail.app }
+        - { name: Messages, path: /System/Applications/Messages.app }
+        - { name: Visual Studio Code, path: /Applications/Visual Studio Code.app }
         - { name: iTerm, path: /Applications/iTerm.app }
-        - { name: Messages, path: /Applications/Messages.app }
-        - { name: App Store, path: /Applications/App Store.app }
-        - { name: System Preferences, path: /Applications/System Preferences.app }
+        - { name: System Preferences, path: /System/Applications/System Preferences.app }
 
     safari:
       enable_developer_menu: true
