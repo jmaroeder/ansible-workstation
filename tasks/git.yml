@@ -16,5 +16,5 @@
         scope: global
         value: osxkeychain
     - name: Store github access token in keychain
-      command: "security add-internet-password -a '{{github_user}}' -s 'github.com' -w '{{github_access_token}}' -r 'htps' -U -T '/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/git-credential-osxkeychain'"
-  when: ansible_os_family == "Darwin" and github_access_token|length > 0
+      command: "security add-internet-password -a '{{github_user}}' -s 'github.com' -w '{{github_access_token}}' -r 'htps' -U"
+  when: ansible_os_family == "Darwin"

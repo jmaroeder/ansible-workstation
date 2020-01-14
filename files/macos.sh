@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -ex
 
 # ~/.macos — https://mths.be/macos
 # with additions from https://github.com/geerlingguy/dotfiles/blob/master/.osx
@@ -437,10 +437,10 @@ defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock show-recents -bool false
 
 # Disable the Launchpad gesture (pinch with thumb and three fingers)
-#defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
+# defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 
 # Reset Launchpad, but keep the desktop wallpaper intact
-find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
+# find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
 
 # if [[ "$RUN_AS_ROOT" = true ]]; then
 	# Add iOS & Watch Simulator to Launchpad
@@ -633,9 +633,9 @@ defaults write com.apple.spotlight orderedItems -array \
 	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
 	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
 	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
-# Load new settings before rebuilding the index
-killall mds > /dev/null 2>&1
 if [[ "$RUN_AS_ROOT" = true ]]; then
+	# Load new settings before rebuilding the index
+	sudo killall mds > /dev/null 2>&1
 	# Make sure indexing is enabled for the main volume
 	sudo mdutil -i on / > /dev/null
 	# Rebuild the index from scratch
@@ -720,11 +720,6 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-
-if [[ "$RUN_AS_ROOT" = true ]]; then
-	# Disable local Time Machine backups
-	hash tmutil &> /dev/null && sudo tmutil disablelocal
-fi
 
 ###############################################################################
 # Activity Monitor                                                            #
@@ -950,7 +945,8 @@ defaults write org.m0k.transmission RandomPort -bool true
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Activity Monitor" \
+for app in \
+	"Activity Monitor" \
 	"Address Book" \
 	"Calendar" \
 	"cfprefsd" \
@@ -972,6 +968,6 @@ for app in "Activity Monitor" \
 	"Tweetbot" \
 	"Twitter" \
 	"iCal"; do
-	killall "${app}" &> /dev/null
+	killall "${app}" &> /dev/null || true
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."

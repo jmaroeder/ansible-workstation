@@ -7,4 +7,4 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 set -x
-ansible-playbook local.yml
+ansible-playbook local.yml --ask-vault-pass
