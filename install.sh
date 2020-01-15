@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+# Prompt for creds if necessary
+sudo -v
+# Keep-alive: update existing `sudo` time stamp until script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
 if test ! $(which ansible); then
     # Install Ansible
 
@@ -26,12 +32,6 @@ if test ! $(which ansible); then
         brew install ansible
     fi
 fi
-
-# Prompt for creds if necessary
-sudo -v
-# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 
 set -x
 ansible-pull --url https://github.com/jmaroeder/ansible-workstation.git
