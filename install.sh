@@ -35,3 +35,5 @@ fi
 
 set -x
 ansible-pull --url https://github.com/jmaroeder/ansible-workstation.git
+
+sudo shutdown -r now

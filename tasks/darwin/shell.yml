@@ -43,3 +43,25 @@
     name: "{{ansible_user_id}}"
     shell: "{{login_shell}}"
   when: login_shell_installed.stat.exists
+
+- name: Set Terminal.app to always start zsh
+  osx_defaults:
+    domain: com.apple.Terminal
+    key: Shell
+    value: /bin/zsh
+
+- name: Enable touch ID for sudo in Terminal and iTerm
+  become: True
+  blockinfile:
+    path: /etc/pam.d/sudo
+    block: |
+      auth optional pam_reattach.so
+      auth sufficient pam_tid.so
+    marker: "# {mark} TOUCH ID SUPPORT"
+    insertbefore: '^auth'
+
+- name: Ensure iTerm 2 preferences are loaded from custom folder
+  osx_defaults:
+    domain: com.googlecode.iterm2
+    key: PrefsCustomFolder
+    value: "{{ansible_user_dir}}/.config/iTerm2"

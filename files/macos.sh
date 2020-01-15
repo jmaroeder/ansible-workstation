@@ -977,7 +977,7 @@ for app in \
 	"SizeUp" \
 	"Spectacle" \
 	"SystemUIServer" \
-	"Terminal" \
+	# "Terminal" \
 	"Transmission" \
 	"Tweetbot" \
 	"Twitter" \
