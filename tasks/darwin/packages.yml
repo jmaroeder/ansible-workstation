@@ -17,15 +17,15 @@
     homebrew_cask_apps:
       - docker
       - dropbox
-      - firefox
       - font-inconsolata-nerd-font-mono
       - google-chrome
+      - iina
       - insomnia
+      - muzzle
       - slack
       - spotify
       - the-unarchiver
       - visual-studio-code
-      - vlc
     homebrew_installed_packages:
       - asdf
       - autoconf
