@@ -65,3 +65,8 @@
     domain: com.googlecode.iterm2
     key: PrefsCustomFolder
     value: "{{ansible_user_dir}}/.config/iTerm2"
+  osx_defaults:
+    domain: com.googlecode.iterm2
+    key: LoadPrefsFromCustomFolder
+    type: int
+    value: 1
