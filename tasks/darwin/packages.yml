@@ -1,6 +1,8 @@
 - name: Install Mac App Store apps
   include_role:
     name: geerlingguy.mas
+    apply:
+      tags: [mas]
   vars:
     mas_installed_apps:
       - id: 441258766
@@ -8,25 +10,14 @@
       - id: 1440147259
         name: AdGuard for Safari (1.5.4)
   when: not ansible_check_mode
+  tags: [mas]
 
-- name: Install Homebrew
+- name: Install Homebrew packages
   include_role:
     name: geerlingguy.homebrew
+    apply:
+      tags: [homebrew]
   vars:
-    homebrew_cask_accept_external_apps: true
-    homebrew_cask_apps:
-      - docker
-      - dropbox
-      - font-inconsolata-nerd-font-mono
-      - google-chrome
-      - iina
-      - insomnia
-      - iterm2
-      - muzzle
-      - slack
-      - spotify
-      - the-unarchiver
-      - visual-studio-code
     homebrew_installed_packages:
       - asdf
       - autoconf
@@ -59,7 +50,35 @@
       - yarn
       - yq
       - zlib
+      - zzz
+    homebrew_taps:
+      - homebrew/core
+    homebrew_upgrade_all_packages: true
+  tags: [homebrew]
+
+- name: Install Homebrew casks
+  include_role:
+    name: geerlingguy.homebrew
+    apply:
+      tags: [cask]
+  vars:
+    homebrew_cask_accept_external_apps: true
+    homebrew_cask_apps:
+      - docker
+      - dropbox
+      - font-inconsolata-nerd-font-mono
+      - google-chrome
+      - iina
+      - insomnia
+      - iterm2
+      - muzzle
+      - slack
+      - spotify
+      - the-unarchiver
+      - visual-studio-code
     homebrew_taps:
       - homebrew/core
       - homebrew/cask
       - homebrew/cask-fonts
+    homebrew_upgrade_all_packages: true
+  tags: [cask]

@@ -87,8 +87,14 @@
     mail:
       address_include_name_on_pasteboard: false
       enable_threading: true
+  tags:
+    - customizations
 
 - name: MacOS scripted customizations
   script: files/macos.sh
+  tags:
+    - scripted
 
 - include_tasks: tasks/darwin/shell.yml
+  tags:
+    - shell

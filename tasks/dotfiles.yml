@@ -4,5 +4,6 @@
       git:
         repo: https://github.com/jmaroeder/dotfiles.git
         dest: "{{ansible_user_dir}}/src/github.com/jmaroeder/dotfiles"
+        force: true
     - name: Symlink
       command: "{{ansible_user_dir}}/src/github.com/jmaroeder/dotfiles/symlink.sh"

@@ -6,7 +6,11 @@ Consistent, repeatable, idempotent(-ish?) workstation setup
 
 ### macOS
 
-Sign in to the Mac App Store prior to running the below command.
+Before running the below command, sign in to:
+
+- Mac App Store
+- iCloud
+- Gmail
 
 ## Quick start
 
@@ -19,6 +23,8 @@ $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/jmaroeder/ansible-work
 TODO
 
 ## Development
+
+**NOTE** This repository uses submodules for the various roles. Be sure to clone using `--recursive` or run `git submodule update --recursive --init` after cloning, otherwise it will appear to do a lot of nothing!
 
 To check for valid syntax:
 
@@ -36,4 +42,10 @@ To run the playbook locally (this keeps a `sudo -v` process re-upping in the bac
 
 ```console
 $ ./run_playbook.sh
+```
+
+To run the playbook locally with special arguments:
+
+```console
+$ ./run_playbook.sh --tags "homebrew"
 ```

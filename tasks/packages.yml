@@ -1,7 +1,11 @@
-- include_tasks: "{{package_file}}"
+- include_tasks:
+    file: "{{package_file}}"
+    apply:
+      tags: [packages]
   with_first_found:
     - files:
         - "tasks/{{ansible_facts['os_family']|lower}}/packages.yml"
       skip: true
   loop_control:
     loop_var: package_file
+  tags: [always]

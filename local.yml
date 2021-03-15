@@ -21,11 +21,17 @@
 
   tasks:
     - include_tasks: tasks/packages.yml
+      tags: [packages,homebrew,mas,cask]
     - include_tasks: tasks/git.yml
+      tags: [git]
     - include_tasks: tasks/dotfiles.yml
+      tags: [dotfiles]
     - include_tasks: tasks/shell.yml
+      tags: [shell]
     - include_tasks: tasks/vscode.yml
+      tags: [vscode]
     - include_tasks: tasks/post.yml
+      tags: [post]
     - include_tasks: "{{post_file}}"
       with_first_found:
         - files:
@@ -33,3 +39,4 @@
           skip: true
       loop_control:
         loop_var: post_file
+      tags: [post]
